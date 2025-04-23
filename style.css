@@ -1,0 +1,438 @@
+:root {
+    --cor-primaria: #1e3a8a;
+    --cor-secundaria: #3b82f6;
+    --cor-texto: #333;
+    --cor-fundo: #f8fafc;
+    --cor-destaque: #e11d48;
+    --cor-sucesso: #10b981;
+    --cor-cabecalho: #1e3a8a;
+    --cor-card: white;
+    --cor-sombra: rgba(0, 0, 0, 0.1);
+    --cor-borda: #e2e8f0;
+    --cor-rodape: #e2e8f0;
+    --cor-texto-rodape: #475569;
+}
+
+/* Modo Escuro */
+[data-theme="dark"] {
+    --cor-primaria: #3b82f6;
+    --cor-secundaria: #1e40af;
+    --cor-texto: #e2e8f0;
+    --cor-fundo: #1e293b;
+    --cor-destaque: #f87171;
+    --cor-sucesso: #34d399;
+    --cor-cabecalho: #1e293b;
+    --cor-card: #334155;
+    --cor-sombra: rgba(0, 0, 0, 0.3);
+    --cor-borda: #475569;
+    --cor-rodape: #0f172a;
+    --cor-texto-rodape: #94a3b8;
+}
+
+/* Estilos do botão de modo escuro */
+#modo-escuro-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] #modo-escuro-btn {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#modo-escuro-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] #modo-escuro-btn:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Atualizações para componentes específicos no modo escuro */
+[data-theme="dark"] header {
+    background-color: var(--cor-cabecalho);
+}
+
+[data-theme="dark"] .letra-card {
+    background-color: var(--cor-card);
+    box-shadow: 0 4px 6px -1px var(--cor-sombra);
+}
+
+[data-theme="dark"] .filtro-btn {
+    border-color: var(--cor-borda);
+    background-color: var(--cor-card);
+    color: var(--cor-texto);
+}
+
+[data-theme="dark"] .pratica-carta,
+[data-theme="dark"] .pergunta-teste {
+    background-color: var(--cor-card);
+    box-shadow: 0 4px 6px -1px var(--cor-sombra);
+}
+
+[data-theme="dark"] footer {
+    background-color: var(--cor-rodape);
+    color: var(--cor-texto-rodape);
+}
+
+[data-theme="dark"] .opcao-teste {
+    background-color: var(--cor-card);
+    border-color: var(--cor-borda);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--cor-primaria);
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+#modos-aprendizado {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.modo-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background-color: #e2e8f0;
+    color: var(--cor-texto);
+    font-weight: 600;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modo-btn.active {
+    background-color: var(--cor-primaria);
+    color: white;
+}
+
+.modo-btn:hover:not(.active) {
+    background-color: #cbd5e1;
+}
+
+.modo-conteudo {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.modo-conteudo.ativo {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+}
+
+.filtro-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #cbd5e1;
+    background-color: white;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filtro-btn.active {
+    background-color: var(--cor-primaria);
+    color: white;
+    border-color: var(--cor-primaria);
+}
+
+.alfabeto-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.letra-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.letra-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.letra-cirilica {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--cor-primaria);
+    margin-bottom: 0.5rem;
+}
+
+.letra-latin {
+    font-size: 1.2rem;
+    color: var(--cor-texto);
+    margin-bottom: 0.5rem;
+}
+
+.pronuncia {
+    font-style: italic;
+    color: #64748b;
+}
+
+.exemplo {
+    font-size: 0.9rem;
+    color: #475569;
+    margin-top: 0.5rem;
+}
+
+/* Seção de Prática */
+.pratica-container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.pratica-carta {
+    perspective: 1000px;
+    margin-bottom: 2rem;
+    height: 300px;
+}
+
+.carta-frente, .carta-verso {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease;
+}
+
+.carta-verso {
+    transform: rotateY(180deg);
+}
+
+.pratica-carta.virou .carta-frente {
+    transform: rotateY(180deg);
+}
+
+.pratica-carta.virou .carta-verso {
+    transform: rotateY(0deg);
+}
+
+.letra-pratica {
+    font-size: 5rem;
+    font-weight: bold;
+    color: var(--cor-primaria);
+    margin-bottom: 1.5rem;
+}
+
+.virar-carta {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--cor-secundaria);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.virar-carta:hover {
+    background-color: #2563eb;
+}
+
+.controles-pratica {
+    display: flex;
+    justify-content: center;
+}
+
+#proxima-carta {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--cor-primaria);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+#proxima-carta:hover {
+    background-color: #1e40af;
+}
+
+/* Seção de Teste */
+.teste-container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.pergunta-teste {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.pergunta-texto {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    color: var(--cor-primaria);
+}
+
+.opcoes-teste {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.opcao-teste {
+    background-color: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.opcao-teste:hover {
+    border-color: var(--cor-secundaria);
+}
+
+.opcao-teste.correta {
+    border-color: var(--cor-sucesso);
+    background-color: rgba(16, 185, 129, 0.1);
+}
+
+.opcao-teste.incorreta {
+    border-color: var(--cor-destaque);
+    background-color: rgba(225, 29, 72, 0.1);
+}
+
+.feedback-teste {
+    min-height: 80px;
+    margin-bottom: 1.5rem;
+}
+
+.resultado {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.correta .resultado {
+    color: var(--cor-sucesso);
+}
+
+.incorreta .resultado {
+    color: var(--cor-destaque);
+}
+
+#proxima-pergunta {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--cor-primaria);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+#proxima-pergunta:hover {
+    background-color: #1e40af;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+    background-color: #e2e8f0;
+    color: #475569;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .alfabeto-container {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+
+    .opcoes-teste {
+        grid-template-columns: 1fr;
+    }
+
+    #modos-aprendizado {
+        flex-direction: column;
+    }
+}

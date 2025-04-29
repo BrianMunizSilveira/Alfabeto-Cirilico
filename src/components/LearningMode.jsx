@@ -40,7 +40,6 @@ export default function LearningMode () {
             {filtro.charAt(0).toUpperCase() + filtro.slice(1)}
           </button>
         ))}
-        ;
       </div>
 
       <div className='alfabeto-container'>

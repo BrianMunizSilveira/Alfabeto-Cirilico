@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
+
 export default function Header ({ darkMode, toggleDarkMode }) {
   return (
     <header>
@@ -8,9 +11,9 @@ export default function Header ({ darkMode, toggleDarkMode }) {
         arial-label='Alternar modo escuro'
         onClick={toggleDarkMode}
       >
-        <i className={`fas ${darkMode ? 'fa-sun' : 'fa-moon'}`}></i>
+        <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
         {darkMode ? 'Modo Claro' : 'Modo Escuro'}
       </button>
     </header>
   )
-};
+}

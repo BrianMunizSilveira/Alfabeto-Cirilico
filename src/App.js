@@ -3,7 +3,7 @@ import Header from './components/Header.jsx';
 import LearningMode from './components/LearningMode.jsx';
 import PracticeMode from './components/PracticeMode.jsx';
 import Footer from './components/Footer.jsx';
-import './components/styles/App.css';
+import './components/styles/App.scss';
 
 function App() {
   const [activeMode, setActiveMode] = useState('aprender');

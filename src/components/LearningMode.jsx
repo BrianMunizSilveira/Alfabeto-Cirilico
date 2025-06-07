@@ -1,27 +1,34 @@
-import React from 'react';
-import { useState } from 'react';
-import AlphabetCard from './AlphabetCard';
-import alphabetData from '../data/alphabetData';
-
+import React from 'react'
+import { useState } from 'react'
+import AlphabetCard from './AlphabetCard'
+import alphabetData from '../data/alphabetData'
 
 // Componente LearningMode
-export function LearningMode() {
-  const [filter, setFilter] = useState('todos');
+export function LearningMode () {
+  const [filter, setFilter] = useState('todos')
 
   const filteredAlphabet = alphabetData.filter(letter => {
     switch (filter) {
       case 'maiusculas':
-        return true;
+        return true
       case 'minusculas':
-        return true;
+        return true
       case 'semelhantes':
-        return letter.latin && letter.latin.length === 1 && /^[A-Za-z]$/.test(letter.latin);
+        return (
+          letter.latin &&
+          letter.latin.length === 1 &&
+          /^[A-Za-z]$/.test(letter.latin)
+        )
       case 'diferentes':
-        return !letter.latin || letter.latin.length !== 1 || !/^[A-Za-z]$/.test(letter.latin);
+        return (
+          !letter.latin ||
+          letter.latin.length !== 1 ||
+          !/^[A-Za-z]$/.test(letter.latin)
+        )
       default:
-        return true;
+        return true
     }
-  });
+  })
 
   const filterOptions = [
     { key: 'todos', label: 'Todos' },
@@ -29,19 +36,17 @@ export function LearningMode() {
     { key: 'minusculas', label: 'Minúsculas' },
     { key: 'semelhantes', label: 'Semelhantes ao Latim' },
     { key: 'diferentes', label: 'Diferentes do Latim' }
-  ];
+  ]
 
   return (
     <div>
-      <div className="flex flex-wrap gap-2 mb-6 justify-center">
+      <div className='filter-container'>
         {filterOptions.map(option => (
           <button
             key={option.key}
             onClick={() => setFilter(option.key)}
-            className={`px-4 py-2 rounded-full border transition-all duration-300 hover:-translate-y-1 ${
-              filter === option.key
-                ? 'bg-blue-600 text-white border-blue-600'
-                : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600'
+            className={`filter-btn ${
+              filter === option.key ? 'active' : 'inactive'
             }`}
           >
             {option.label}
@@ -49,19 +54,19 @@ export function LearningMode() {
         ))}
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+      <div className='alphabet-grid'>
         {filteredAlphabet.length > 0 ? (
           filteredAlphabet.map((letter, index) => (
             <AlphabetCard key={index} letter={letter} filter={filter} />
           ))
         ) : (
-          <div className="col-span-full text-center text-gray-500 dark:text-gray-400 py-8">
+          <div className="empty-state">
             Nenhuma letra encontrada com este filtro.
           </div>
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export default LearningMode;
+export default LearningMode

@@ -1,6 +1,35 @@
 import React, { useState, useEffect } from 'react'
 import alphabetData from '../data/alphabetData'
-// Componente TestMode
+
+// Função utilitária para exibir a opção correta conforme o tipo de pergunta
+const getDisplay = (letter, type) => {
+  switch (type) {
+    case 'letra-pronuncia':
+      return letter.pronuncia
+    case 'pronuncia-letra':
+    case 'exemplo-letra':
+      return `${letter.maiuscula} ${letter.minuscula}`
+    default:
+      return ''
+  }
+}
+
+// Função para gerar opções incorretas sem repetições ou ambiguidade
+const generateIncorrectOptions = (correctLetter, type, allLetters, numOptions = 3) => {
+  const incorrectOptions = []
+  while (incorrectOptions.length < numOptions) {
+    const randomLetter = allLetters[Math.floor(Math.random() * allLetters.length)]
+    if (
+      randomLetter !== correctLetter &&
+      !incorrectOptions.includes(randomLetter) &&
+      getDisplay(randomLetter, type) !== getDisplay(correctLetter, type)
+    ) {
+      incorrectOptions.push(randomLetter)
+    }
+  }
+  return incorrectOptions
+}
+
 export function TestMode () {
   const [currentQuestion, setCurrentQuestion] = useState(null)
   const [score, setScore] = useState(0)
@@ -10,6 +39,7 @@ export function TestMode () {
 
   useEffect(() => {
     generateNewQuestion()
+    // eslint-disable-next-line
   }, [])
 
   const generateNewQuestion = () => {
@@ -22,34 +52,32 @@ export function TestMode () {
     const correctLetter =
       alphabetData[Math.floor(Math.random() * alphabetData.length)]
 
-    // Gerar opções incorretas
-    let incorrectOptions = []
-    while (incorrectOptions.length < 3) {
-      const randomLetter =
-        alphabetData[Math.floor(Math.random() * alphabetData.length)]
-      if (
-        randomLetter !== correctLetter &&
-        !incorrectOptions.includes(randomLetter)
-      ) {
-        incorrectOptions.push(randomLetter)
-      }
-    }
+    // Gera opções incorretas filtradas
+    const incorrectOptions = generateIncorrectOptions(correctLetter, type, alphabetData)
 
-    // Misturar opções
+    // Mistura opções e define o que será exibido
     const allOptions = [correctLetter, ...incorrectOptions]
       .sort(() => Math.random() - 0.5)
       .map(letter => ({
         letter,
-        display:
-          type === 'letra-pronuncia' ? letter.pronuncia : letter.maiuscula
+        display: getDisplay(letter, type)
       }))
 
-    const questionText =
-      type === 'pronuncia-letra'
-        ? `Pronúncia: "${correctLetter.pronuncia}"`
-        : type === 'letra-pronuncia'
-        ? `Letra: ${correctLetter.maiuscula}`
-        : `Exemplo: ${correctLetter.exemplo.split(' ')[0]}`
+    // Define enunciado da pergunta
+    let questionText = ''
+    switch (type) {
+      case 'pronuncia-letra':
+        questionText = `Pronúncia: "${correctLetter.pronuncia}"`
+        break
+      case 'letra-pronuncia':
+        questionText = `Letra: ${correctLetter.maiuscula} ${correctLetter.minuscula}`
+        break
+      case 'exemplo-letra':
+        questionText = `Exemplo: ${correctLetter.exemplo}`
+        break
+      default:
+        questionText = ''
+    }
 
     setCurrentQuestion({
       text: questionText,
@@ -85,14 +113,14 @@ export function TestMode () {
         <p>
           Pontuação: {score} / {totalQuestions}
           {totalQuestions > 0 && (
-            <span>({Math.round((score / totalQuestions) * 100)}%)</span>
+            <span> ({Math.round((score / totalQuestions) * 100)}%)</span>
           )}
         </p>
       </div>
 
       {/* Pergunta */}
       <div className='question-box'>
-        <p>Qual é a letra que corresponde a:</p>
+        <p>Qual é a alternativa correta?</p>
         <p>{currentQuestion?.text}</p>
       </div>
 

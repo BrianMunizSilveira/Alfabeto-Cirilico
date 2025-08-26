@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Componente AlphabetCard
-export function AlphabetCard ({ letter, filter }) {
+export function AlphabetCard ({ letter, filter, onPlayAudio }) {
   const renderLetter = () => {
     switch (filter) {
       case 'maiusculas':
@@ -15,7 +15,19 @@ export function AlphabetCard ({ letter, filter }) {
 
   return (
     <div className='alphabet-card'>
-      <div className='letter'>{renderLetter()}</div>
+      {/* Cabeçalho com letra e botão de áudio */}
+      <div className='card-header'>
+        <div className='letter'>{renderLetter()}</div>
+        <button 
+          className='audio-btn'
+          onClick={onPlayAudio}
+          title={`Ouvir pronúncia: ${letter.pronuncia}`}
+        >
+          🔊
+        </button>
+      </div>
+      
+      {/* Resto das informações */}
       <div className='latin'>{letter.latin || '-'}</div>
       <div className='pronuncia'>"{letter.pronuncia}"</div>
       <div className='exemplo'>{letter.exemplo}</div>

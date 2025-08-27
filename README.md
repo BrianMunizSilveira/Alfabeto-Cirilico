@@ -1,46 +1,140 @@
-# Getting Started with Create React App
+# 📘 Alfabeto Cirílico: Guia Interativo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Status Concluído](https://img.shields.io/badge/Status-Desenvolvimento-brightgreen) ![Licença MIT](https://img.shields.io/badge/Licen%C3%A7a-MIT-yellow)  
 
-## Available Scripts
+Um projeto interativo para aprender o alfabeto cirílico de forma prática e visual. Ideal para estudantes de línguas eslavas (russo, ucraniano, búlgaro etc.) — com flashcards, áudio e um modo de quiz.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 📋 Tabela de Conteúdos
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Sobre o Projeto](#-sobre-o-projeto)  
+- [Funcionalidades](#-funcionalidades)  
+- [Tecnologias Utilizadas](#-tecnologias-utilizadas)  
+- [Como Executar](#-como-executar)  
+- [Estrutura do Projeto](#-estrutura-do-projeto)  
+- [Contribuição](#-contribui%C3%A7%C3%A3o)  
+- [Licença](#-licen%C3%A7a)  
+- [Contato](#-contato)  
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## 🚀 Sobre o Projeto
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Este projeto foi criado para facilitar o aprendizado do alfabeto cirílico russo através de uma interface simples e responsiva. Cada letra apresenta forma maiúscula/minúscula, transliteração, pronúncia e exemplos — além de áudio quando disponível.
 
-### `npm run build`
+Dados das letras: veja [`alphabetData`](src/data/alphabetData.js). A aplicação principal está em [`App`](src/App.js) e a entrada em [`index.js`](src/index.js).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## ✨ Funcionalidades
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Visualização por flashcards com frente/verso (`LearningMode`) — veja o componente [`LearningMode`](src/components/LearningMode.jsx).  
+- Modo prática com flip card e navegação (`PracticeMode`) — veja [`PracticeMode`](src/components/PracticeMode.jsx).  
+- Modo teste/quiz com pontuação (`TestMode`) — veja [`TestMode`](src/components/TestMode.jsx).  
+- Reprodução de áudio das letras (arquivos em [public/assets/audio](public/assets/audio)).  
+- Filtros, modo aleatório e fallback TTS quando o MP3 não estiver disponível.  
+- Design responsivo e atenção à acessibilidade.
 
-### `npm run eject`
+Componentes principais: [`AlphabetCard`](src/components/AlphabetCard.jsx), [`Header`](src/components/Header.jsx), [`Footer`](src/components/Footer.jsx).
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🛠 Tecnologias Utilizadas
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Frontend: HTML5, CSS3, JavaScript (ES6+)  
+- Biblioteca: React (componentes em `src/components/`)  
+- Build / scripts: [`package.json`](package.json) (`react-scripts`)  
+- Áudio: arquivos MP3 em [public/assets/audio](public/assets/audio)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Arquivos importantes:
+- [src/App.js](src/App.js) — componente principal  
+- [src/index.js](src/index.js) — ponto de entrada  
+- [src/data/alphabetData.js](src/data/alphabetData.js) — dados do alfabeto  
+- [public/index.html](public/index.html) — HTML base
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📂 Como Executar
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Pré-requisitos:
+- Node.js v14+  
+- npm ou yarn  
+- Git (opcional)
+
+Passos rápidos:
+
+1. Clone o repositório:
+
+```bash
+git clone https://github.com/seu-usuario/alfabeto-cirilico.git
+cd alfabeto-cirilico
+```
+
+2. Instale as dependências:
+
+```bash
+npm install
+# ou
+yarn install
+```
+
+3. Execute o projeto:
+
+```bash
+npm start
+# ou
+yarn start
+```
+
+O projeto será iniciado em `http://localhost:3000`.
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+alfabeto-cirilico/
+├── public/
+│   ├── assets/
+│   │   └── audio/         # Arquivos de áudio das letras
+│   ├── index.html         # HTML base
+│   └── ...
+├── src/
+│   ├── components/        # Componentes React
+│   │   ├── AlphabetCard.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Header.jsx
+│   │   ├── LearningMode.jsx
+│   │   ├── PracticeMode.jsx
+│   │   └── TestMode.jsx
+│   ├── data/
+│   │   └── alphabetData.js # Dados do alfabeto
+│   ├── App.js             # Componente principal
+│   └── index.js           # Ponto de entrada
+├── .gitignore
+├── package.json
+└── README.md
+```
+
+---
+
+## 🤝 Contribuição
+
+Contribuições são bem-vindas! Sinta-se à vontade para enviar um pull request ou abrir uma issue para discutirmos melhorias.
+
+---
+
+## 📜 Licença
+
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+## 📫 Contato
+
+Para dúvidas ou sugestões, entre em contato:
+
+- Brian Muniz - [brian.muniz.silveira@gmail.com](mailto:brian.muniz.silveira@gmail.com)  
+- GitHub: [Brian Muniz Silveira](https://github.com/BrianMunizSilveira)  
+

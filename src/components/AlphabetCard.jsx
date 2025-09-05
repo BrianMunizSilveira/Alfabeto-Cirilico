@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // Componente AlphabetCard
 export function AlphabetCard ({ letter, filter, onPlayAudio }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  
   const renderLetter = () => {
     switch (filter) {
       case 'maiusculas':
@@ -12,16 +14,27 @@ export function AlphabetCard ({ letter, filter, onPlayAudio }) {
         return `${letter.maiuscula} ${letter.minuscula}`
     }
   }
+  
+  const handlePlayAudio = () => {
+    setIsPlaying(true);
+    onPlayAudio();
+    
+    // Resetar o estado após a animação
+    setTimeout(() => {
+      setIsPlaying(false);
+    }, 1500);
+  };
 
   return (
-    <div className='alphabet-card'>
+    <div className='alphabet-card fade-in'>
       {/* Cabeçalho com letra e botão de áudio */}
       <div className='card-header'>
         <div className='letter'>{renderLetter()}</div>
         <button 
-          className='audio-btn'
-          onClick={onPlayAudio}
+          className={`audio-btn ${isPlaying ? 'playing' : ''}`}
+          onClick={handlePlayAudio}
           title={`Ouvir pronúncia: ${letter.pronuncia}`}
+          aria-label={`Ouvir pronúncia da letra ${letter.latin || renderLetter()}`}
         >
           🔊
         </button>

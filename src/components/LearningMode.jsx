@@ -132,8 +132,11 @@ export function LearningMode() {
     <div onClick={enableAudio}> {/* Habilita áudio com qualquer clique */}
       
       {/* Status do áudio */}
-      <div className={`audio-status ${isAudioEnabled ? 'enabled' : 'disabled'}`}>
-        <span>{isAudioEnabled ? '🔊' : '🔇'}</span>
+      <div className={`audio-status ${isAudioEnabled ? 'enabled' : 'disabled'}`}
+           role="button"
+           tabIndex={0}
+           aria-label={isAudioEnabled ? 'Áudio habilitado' : 'Clique para habilitar áudio'}>
+        <span role="img" aria-hidden="true">{isAudioEnabled ? '🔊' : '🔇'}</span>
         <span>
           {isAudioEnabled 
             ? (currentlyPlaying ? `Tocando: ${currentlyPlaying}` : 'Áudio pronto') 
@@ -160,16 +163,17 @@ export function LearningMode() {
         {filteredAlphabet.length > 0 ? (
           filteredAlphabet.map((letter, index) => (
             <AlphabetCard 
-              key={`${letter.minuscula}-${index}`} // Key mais específica
+              key={`${letter.minuscula}-${index}`}
               letter={letter} 
               filter={filter}
               onPlayAudio={() => playAudio(letter)}
               isPlaying={currentlyPlaying === letter.minuscula || currentlyPlaying === `${letter.minuscula}-tts`}
+              style={{ animationDelay: `${index * 50}ms` }}
             />
           ))
         ) : (
           <div className="empty-state">
-            <span>🔍</span>
+            <span role="img" aria-hidden="true">🔍</span>
             <p>Nenhuma letra encontrada com este filtro.</p>
           </div>
         )}

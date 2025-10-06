@@ -782,6 +782,100 @@ a:hover {
   background-color: rgba(239, 68, 68, 0.3);
 }
 
+/* Feedback do Teste */
+.feedback-box {
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xl);
+  padding: var(--space-md);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  color: var(--text-secondary);
+}
+
+.feedback-correct {
+  color: var(--success-500);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: var(--space-xs);
+}
+
+.feedback-incorrect {
+  color: var(--error-500);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: var(--space-xs);
+}
+
+/* Botão Próxima Pergunta */
+div.next-question-overlay{
+  display: flex;
+    margin-bottom: 1.5rem;
+}
+
+.next-question-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-lg);
+  background-color: var(--primary-600);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: none;
+  letter-spacing: 0.3px;
+  box-shadow: var(--shadow-md);
+  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.next-question-btn:hover {
+  background-color: var(--primary-700);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.next-question-btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.next-question-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.35);
+}
+
+
+/* Spinner discreto */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Microanimações do botão */
+.next-question-btn {
+  transform: translateZ(0); /* melhora a suavidade */
+}
+.next-question-btn:hover {
+  transform: scale(1.02);
+}
+.next-question-btn.loading {
+  background-color: var(--primary-700);
+  cursor: wait;
+}
+
 /* Footer */
 .footer-enhanced {
   margin-top: auto;

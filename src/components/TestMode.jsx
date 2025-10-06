@@ -36,6 +36,7 @@ export function TestMode () {
   const [totalQuestions, setTotalQuestions] = useState(0)
   const [selectedOption, setSelectedOption] = useState(null)
   const [showFeedback, setShowFeedback] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     generateNewQuestion()
@@ -103,7 +104,11 @@ export function TestMode () {
   }
 
   const handleNextQuestion = () => {
-    generateNewQuestion()
+    setIsLoading(true)
+    setTimeout(() => {
+      generateNewQuestion()
+      setIsLoading(false)
+    }, 300)
   }
 
   return (
@@ -177,9 +182,17 @@ export function TestMode () {
       )}
 
       {/* Botão Próxima Pergunta */}
-      <button onClick={handleNextQuestion} className='next-question-btn'>
-        Próxima Pergunta
-      </button>
+      <div className='next-question-overlay'>
+        <button
+          onClick={handleNextQuestion}
+          className={`next-question-btn ${isLoading ? 'loading' : ''}`}
+          disabled={isLoading}
+          aria-busy={isLoading}
+        >
+          {isLoading ? 'Carregando...' : 'Próxima Pergunta'}
+          {isLoading && <span className='spinner' aria-hidden='true'></span>}
+        </button>
+      </div>
     </div>
   )
 }

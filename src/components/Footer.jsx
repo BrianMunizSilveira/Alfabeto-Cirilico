@@ -6,13 +6,13 @@ export function Footer() {
     {
       name: 'GitHub',
       icon: '🔗',
-      url: '#',
+      url: 'https://github.com/BrianMunizSilveira/alfabeto-cirilico',
       description: 'Código fonte'
     },
     {
       name: 'Email',
       icon: '✉️',
-      url: 'mailto:contato@aprendendorusso.com',
+      url: 'mailto:brian.muniz.silveira@gmail.com',
       description: 'Entre em contato'
     }
   ], [])
